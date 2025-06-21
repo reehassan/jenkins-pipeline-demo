@@ -1,7 +1,8 @@
 pipeline {
   agent {
     docker {
-      image 'python:3.10' // Docker image has no restrictions
+      image 'python:3.10'
+      args '-u 0'
     }
   }
 
@@ -11,7 +12,6 @@ pipeline {
   }
 
   stages {
-
     stage('Install Deps') {
       steps {
         sh 'pip install -r requirements.txt'
