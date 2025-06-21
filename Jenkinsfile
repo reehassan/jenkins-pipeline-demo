@@ -1,19 +1,16 @@
 pipeline {
   agent any
+
   stages {
-    stage('Build') {
+    stage('Install Python deps') {
       steps {
-        echo 'Building the app...'
+        sh 'sudo apt-get update && sudo apt-get install -y python3 python3-pip'
       }
     }
+
     stage('Test') {
       steps {
-        echo 'Running tests...'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
+        sh 'python3 -m unittest discover'
       }
     }
   }
