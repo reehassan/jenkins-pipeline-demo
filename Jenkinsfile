@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'python:3.10' // Docker image has no restrictions
+    }
+  }
 
   environment {
     IMAGE_NAME = 'flask-ci-cd-demo'
@@ -35,11 +39,9 @@ pipeline {
       }
     }
 
-    // Optional
     stage('Notify') {
       steps {
-        echo "Build & Deploy complete!"
-        // For Slack: Use slackSend plugin (optional)
+        echo "✅ Flask CI/CD pipeline complete!"
       }
     }
   }
@@ -47,7 +49,6 @@ pipeline {
   post {
     failure {
       echo "❌ Build failed! Check logs."
-      // Optional: Send failure alert
     }
   }
 }
