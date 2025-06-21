@@ -1,9 +1,11 @@
 import unittest
-from app import add
+from app import app
 
-class TestAdd(unittest.TestCase):
-    def test_add(self):
-        self.assertEqual(add(2, 3), 5)
+class FlaskTest(unittest.TestCase):
+    def test_home(self):
+        tester = app.test_client(self)
+        response = tester.get('/')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
